@@ -6,7 +6,7 @@ def catalog(request):
         'title': 'Home catalog',
         'goods': [{'image': 'deps/images/goods/set of tea table and three chairs.jpg',
                    'name': 'Чайный столик и три стула',
-                   'description': 'Комплект из трёх стульев и дизайнерский столик для гостинной комнаты.',
+                   'description': 'Комплект из трёх стульев и дизайнерский столик для гостиной комнаты.',
                    'price': 150.00},
 
                   {'image': 'deps/images/goods/set of tea table and two chairs.jpg',

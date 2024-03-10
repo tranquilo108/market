@@ -8,7 +8,10 @@ class Categories(models.Model):
     class Meta:
         verbose_name = 'Категорию'
         verbose_name_plural = 'Категории'
-        db_table = 'category'
+        db_table = 'categories'
+
+    def __str__(self):
+        return self.name
 
 
 class Products(models.Model):
@@ -17,7 +20,7 @@ class Products(models.Model):
     description = models.TextField(blank=True, null=True, verbose_name='Описание товара')
     image = models.ImageField(upload_to='goods_images', blank=True, null=True, verbose_name='Изображение товара')
     price = models.DecimalField(default=0.00, max_digits=7, decimal_places=2, verbose_name='Цена товара')
-    discount = models.DecimalField(default=0.00, max_digits=7, decimal_places=2, verbose_name='Скидка в %')
+    discount = models.DecimalField(default=0.00, max_digits=4, decimal_places=2, verbose_name='Скидка в %')
     quantity = models.PositiveIntegerField(default=0, verbose_name='Количество товара')
     category = models.ForeignKey(to=Categories, on_delete=models.CASCADE, verbose_name='Категория товара')
 
@@ -25,3 +28,6 @@ class Products(models.Model):
         verbose_name = 'Продукт'
         verbose_name_plural = 'Продукты'
         db_table = 'product'
+
+    def __str__(self):
+        return f'{self.name} Количество: {self.quantity}'
