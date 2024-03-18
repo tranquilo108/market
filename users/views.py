@@ -36,7 +36,7 @@ def login(request):
         form = UserLoginForm()
 
     context = {
-        'title': 'Home - Авторизация',
+        'title': 'Market - Авторизация',
         'form': form,
     }
 
@@ -61,7 +61,7 @@ def registration(request):
     else:
         form = UserRegistrationForm()
     context = {
-        'title': 'Home - Регистрация',
+        'title': 'Market - Регистрация',
         'form': form,
     }
     return render(request, 'users/registration.html', context)
@@ -81,7 +81,7 @@ def profile(request):
     orders = (Order.objects.filter(user=request.user).prefetch_related(
         Prefetch('orderitem_set', queryset=OrderItem.objects.select_related('product'))).order_by('-id'))
     context = {
-        'title': 'Home - Кабинет',
+        'title': 'Market - Кабинет',
         'form': form,
         'orders': orders
     }

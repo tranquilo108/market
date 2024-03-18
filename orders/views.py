@@ -3,6 +3,8 @@ from django.forms import ValidationError
 from django.db import transaction
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.urls import reverse
+
 from carts.models import Cart
 from orders.forms import CreateOrderForm
 from orders.models import Order, OrderItem
@@ -26,6 +28,7 @@ def create_order(request):
                             delivery_address=form.cleaned_data['delivery_address'],
                             payment_on_get=form.cleaned_data['payment_on_get'],
                         )
+                        request.session['order_id'] = order.pk
 
                         for cart_item in cart_items:
                             product = cart_item.product
@@ -47,10 +50,10 @@ def create_order(request):
                             product.quantity -= quantity
                             product.save()
 
-                        cart_items.delete()
+                        # cart_items.delete()
 
                         messages.success(request, 'Заказ оформлен')
-                        return redirect('user:profile')
+                        return redirect('payment:process', {'cart_items': cart_items})
             except ValidationError as e:
                 messages.success(request, str(e))
                 return redirect('cart:order')
@@ -62,7 +65,7 @@ def create_order(request):
         form = CreateOrderForm(initial=initial)
 
     context = {
-        'title': 'Home - Оформление заказа',
+        'title': 'Market - Оформление заказа',
         'form': form,
         'orders': True,
     }

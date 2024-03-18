@@ -6,14 +6,14 @@ from goods.models import Categories
 
 def index(request):
     context = {
-        'title': 'Home - Главная',
-        'content': 'Магазин мебели Home'
+        'title': 'Market - Главная',
+        'content': 'Магазин мебели Market'
     }
     return render(request, 'main/index.html', context)
 
 
 def about(request):
-    context = {'title': 'Home - О нас',
+    context = {'title': 'Market - О нас',
                'content': 'О нас',
                'text_on_page': 'Текст о том почему этот магазин такой классный, и какой хороший товарТекст о том почему'
                                'этот магазин такой классный, и какой хороший товарТекст о том почему этот магазин '
@@ -31,3 +31,7 @@ def about(request):
                                'и какой хороший товарТекст о том почему этот магазин такой классный, и какой хороший '
                                'товар'}
     return render(request, 'main/about.html', context)
+
+
+def copyright(request):
+    return render(request, 'main/copyright.html')
